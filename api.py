@@ -1,12 +1,12 @@
 import requests
 from datetime import datetime
-from googletrans import Translator 
 
 def get_weather_forecast(lat, lon):
     user_api = 'ca7f97251a8e3e4fd7d10d6d94546ceb'  # Twój klucz API
 
     api_link = f"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={user_api}"
     api_data = requests.get(api_link).json()
+    
 
     if api_data['cod'] == 200:
         # Pobranie danych o pogodzie z odpowiednich kluczy
@@ -81,7 +81,8 @@ def run_weather_app():
         location_name = get_location_name(lat, lon)
 
         if weather_info is not None and location_name is not None:
-            print("-------------------------------------------------------------")
+            current_data = datetime.now().date()
+            print("---------------------",current_data,"--------------------------")
             print("Weather for: {} || {}".format(location_name, weather_info['location']))
             print("-------------------------------------------------------------")
             print("Temperature: {:.2f} °C".format(weather_info['temperature']))
@@ -89,7 +90,10 @@ def run_weather_app():
             print("Humidity: {}%".format(weather_info['humidity']))
             print("Wind speed: {} km/h".format(weather_info['wind_speed']))
             if weather_info is not None and location_name is not None:    #save to file txt
-                with open("weather_data.txt", "w") as file:
+                
+                file_name = "Weather_"+("{}_".format(location_name)) + str(datetime.now().date()) +  ".txt" #name file is "Weather and current date"
+                
+                with open(file_name, "w") as file:
                     file.write("Weather for: {} || {}\n".format(location_name, weather_info['location']))
                     file.write("Temperature: {:.2f}°C\n".format(weather_info['temperature']))
                     file.write("Humidity: {}%\n".format(weather_info['humidity']))
@@ -124,7 +128,9 @@ def run_weather_app():
             print("Wilgotność: {}%".format(weather_info['humidity']))
             print("Prędkość wiatru: {} km/h".format(weather_info['wind_speed']))
             if weather_info is not None and location_name is not None:   #save to file txt
-                with open("weather_data.txt", "w") as file:
+                
+                file_name = "Pogoda_"+("{}_".format(location_name)) + str(datetime.now().date()) +  ".txt"
+                with open(file_name, "w") as file:
                     file.write("Pogoda dla {} || {}\n".format(location_name, weather_info['location']))
                     file.write("Temperatura: {:.2f}°C\n".format(weather_info['temperature']))
                     file.write("Wilgotność: {}%\n".format(weather_info['humidity']))
