@@ -1,5 +1,6 @@
 import requests
 from datetime import datetime
+from googletrans import Translator 
 
 def get_weather_forecast(lat, lon):
     user_api = 'ca7f97251a8e3e4fd7d10d6d94546ceb'  # Twój klucz API
@@ -58,16 +59,18 @@ def get_coordinates(location_name):
     
     return None, None
 
+
 def run_weather_app():
     choose_language = input("What language? (English - E / Polish - P): ")
     
-    if choose_language == "E":
+    #Function "lower" changes all letters to lowercase    
+    if choose_language.lower() == "e":
         choose_ways = input("Search Name - N / Coordinates - C: ")
         
-        if choose_ways == "N":
+        if choose_ways.lower() == "n":
             location_name = input("Enter city name:")
             lat, lon = get_coordinates(location_name)
-        elif choose_ways == "C":
+        elif choose_ways.lower() == "c":
             lat = input("Enter latitude (e.g., 52.2297):")
             lon = input("Enter longitude (e.g., 21.0122):")
         else:
@@ -85,18 +88,24 @@ def run_weather_app():
             print("Weather description:", weather_info['weather_desc'])
             print("Humidity: {}%".format(weather_info['humidity']))
             print("Wind speed: {} km/h".format(weather_info['wind_speed']))
+            if weather_info is not None and location_name is not None:    #save to file txt
+                with open("weather_data.txt", "w") as file:
+                    file.write("Weather for: {} || {}\n".format(location_name, weather_info['location']))
+                    file.write("Temperature: {:.2f}°C\n".format(weather_info['temperature']))
+                    file.write("Humidity: {}%\n".format(weather_info['humidity']))
+                    file.write("Wind speed: {} km/h\n".format(weather_info['wind_speed']))
             run_weather_app()
         else:
             print("Error fetching weather data or city name. Check the entered coordinates.")
             run_weather_app()
             
-    elif choose_language == "P":
+    elif choose_language.lower() == "p":
         choose_ways = input("Szukanie nazwą - N / Współrzędnymi - C: ")
         
-        if choose_ways == "N":
+        if choose_ways.lower() == "n":
             location_name = input("Wprowadź nazwę miejscowości:")
             lat, lon = get_coordinates(location_name)
-        elif choose_ways == "C":
+        elif choose_ways.lower() == "c":
             lat = input("Wprowadź szerokość geograficzną (np. 52.2297):")
             lon = input("Wprowadź długość geograficzną (np. 21.0122):")
         else:
@@ -106,7 +115,7 @@ def run_weather_app():
         weather_info = get_weather_forecast(lat, lon)
         location_name = get_location_name(lat, lon)
 
-        if weather_info is not None and location_name is not None:
+        if weather_info is not None and location_name is not None:   
             print("-------------------------------------------------------------")
             print("Pogoda dla {} || {}".format(location_name, weather_info['location']))
             print("-------------------------------------------------------------")
@@ -114,12 +123,21 @@ def run_weather_app():
             print("Opis pogody:", weather_info['weather_desc'])
             print("Wilgotność: {}%".format(weather_info['humidity']))
             print("Prędkość wiatru: {} km/h".format(weather_info['wind_speed']))
+            if weather_info is not None and location_name is not None:   #save to file txt
+                with open("weather_data.txt", "w") as file:
+                    file.write("Pogoda dla {} || {}\n".format(location_name, weather_info['location']))
+                    file.write("Temperatura: {:.2f}°C\n".format(weather_info['temperature']))
+                    file.write("Wilgotność: {}%\n".format(weather_info['humidity']))
+                    file.write("Prędkość wiatru: {} km/h\n".format(weather_info['wind_speed']))
             run_weather_app()
+            
+            
         else:
             print("Błąd w pobieraniu danych o pogodzie lub nazwy miejscowości. Sprawdź wprowadzone dane.")
             run_weather_app()
     else: 
         run_weather_app()
+    
+run_weather_app()
 
 
-run_weather_app()  # Uruchomienie aplikacji
