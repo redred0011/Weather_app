@@ -18,19 +18,28 @@ def main():
         weather_data = get_future_weather(location, api_key)
 
         if 'days' in weather_data:
-            
-            for index, day_data in enumerate(weather_data['days']):
-                if index >= choose_days:
-                    break
-                print("Data:", day_data['datetime'])
-                print("Opis pogody:", day_data['description'])
-                print("Temperatura maksymalna:", day_data['tempmax'])
-                print("Temperatura minimalna:", day_data['tempmin'])
-                print("Prędkość wiatru:", day_data['windspeed'])
-                print("--------------------")
+           
+            file_name =  "Pogoda_"+("{}".format(location))+".txt" 
+            with open(file_name, "w") as file:  
+                for index, day_data in enumerate(weather_data['days']):
+                    if index >= choose_days:
+                        break
+                    print("Data:", day_data['datetime'])
+                    print("Opis pogody:", day_data['description'])
+                    print("Temperatura maksymalna:", day_data['tempmax'])
+                    print("Temperatura minimalna:", day_data['tempmin'])
+                    print("Prędkość wiatru:", day_data['windspeed'])
+                    print("--------------------")
+                    file.write(f"Pogoda dla: {location}\n")  #Zapis do pliku txt
+                    file.write(f"Data: {day_data['datetime']}\n")
+                    file.write(f"Opis pogody: {day_data['description']}\n")
+                    file.write(f"Temperatura maksymalna: {day_data['tempmax']}\n")
+                    file.write(f"Temperatura minimalna: {day_data['tempmin']}\n")
+                    file.write(f"Prędkość wiatru: {day_data['windspeed']}\n")
+                    file.write("--------------------\n")
         else:
             print("Brak danych pogodowych dla podanej lokalizacji.")
     else:
         print("Wprowadzono nieodpowiednią liczbę dni. Spróbuj ponownie.")
 
-main()
+

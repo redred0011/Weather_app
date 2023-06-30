@@ -20,9 +20,9 @@ def main():    #Główna funkcja programu do interakcji z użytkownikiem i wyśw
         weather_data = get_historical_weather(start_date, end_date, location, api_key)
     
         if 'days' in weather_data:
-            file_name = "Pogoda.txt"
+            file_name =  "Pogoda_"+("{}".format(location))+".txt" 
                 
-            with open(file_name, "w") as file:     #Zapis do pliku txt
+            with open(file_name, "w") as file:     
                 for day_data in weather_data['days']:           #Wyświetlenie pobranych danych 
                     print("Data:", day_data['datetime'])
                     print("Opis pogody:", day_data['description'])
@@ -30,7 +30,7 @@ def main():    #Główna funkcja programu do interakcji z użytkownikiem i wyśw
                     print("Temperatura minimalna:", day_data['tempmin'])
                     print("Prędkość wiatru:", day_data['windspeed'])
                     print("--------------------") 
-                    file.write(f"Pogoda dla: {location} || {day_data['datetime']}\n")
+                    file.write(f"Pogoda dla: {location}\n")  #Zapis do pliku txt
                     file.write(f"Data: {day_data['datetime']}\n")
                     file.write(f"Opis pogody: {day_data['description']}\n")
                     file.write(f"Temperatura maksymalna: {day_data['tempmax']}\n")
@@ -49,17 +49,30 @@ def main():    #Główna funkcja programu do interakcji z użytkownikiem i wyśw
         weather_data = get_historical_weather(start_date, end_date, location, api_key)
         
         if 'days' in weather_data:
-            for day_data in weather_data['days']:               #Wyświetlenie pobranych danych 
-                print("Data:", day_data['datetime'])
-                print("Opis pogody:", day_data['description'])
-                print("Temperatura maksymalna:", day_data['tempmax'])
-                print("Temperatura minimalna:", day_data['tempmin'])
-                print("Prędkość wiatru:", day_data['windspeed'])
-                print("--------------------")
-                break # Pętla zostanie przerwana po pierwszym przejściu przez pętlę for 
-            else:
-                print("Brak danych pogodowych dla podanego zakresu dat i lokalizacji.")
+            
+            
+            file_name =  "Pogoda_"+("{}".format(location))+".txt" 
+                
+            with open(file_name, "w") as file:
+            
+                for day_data in weather_data['days']:               #Wyświetlenie pobranych danych 
+                    print("Data:", day_data['datetime'])
+                    print("Opis pogody:", day_data['description'])
+                    print("Temperatura maksymalna:", day_data['tempmax'])
+                    print("Temperatura minimalna:", day_data['tempmin'])
+                    print("Prędkość wiatru:", day_data['windspeed'])
+                    print("--------------------")
+                    file.write(f"Pogoda dla: {location}\n")  #Zapis do pliku txt 
+                    file.write(f"Data: {day_data['datetime']}\n")
+                    file.write(f"Opis pogody: {day_data['description']}\n")
+                    file.write(f"Temperatura maksymalna: {day_data['tempmax']}\n")
+                    file.write(f"Temperatura minimalna: {day_data['tempmin']}\n")
+                    file.write(f"Prędkość wiatru: {day_data['windspeed']}\n")
+                    file.write("--------------------\n")
+                    break # Pętla zostanie przerwana po pierwszym przejściu przez pętlę for 
+                else:
+                    print("Brak danych pogodowych dla podanego zakresu dat i lokalizacji.")
 
-main()
+
     
     
