@@ -74,5 +74,3 @@ def main():    #Główna funkcja programu do interakcji z użytkownikiem i wyśw
                     print("Brak danych pogodowych dla podanego zakresu dat i lokalizacji.")
 
 
-    
-    

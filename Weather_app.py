@@ -76,9 +76,9 @@ def main_3():
 
 def run_weather_app(): #Główna funkcja programu Weather_app 
     
-    choose_option = input("Currently weather? - C / Retrograde weather? - R / Future weather ? - F ").lower()  #Pobieranie danych od użytkownika 
+    choose_option = input("Currently weather? - C / Retrograde weather? - R / Future weather ? - F:").lower()  #Pobieranie danych od użytkownika 
     
-    if choose_option == "f":
+    if choose_option == "f": 
         
         main_3()
     
@@ -119,9 +119,8 @@ def run_weather_app(): #Główna funkcja programu Weather_app
                 if weather_info is not None and location_name is not None:   
                 
                     file_name = "Weather_"+("{}_".format(location_name)) + str(datetime.now().date()) +  ".txt" #Nazwa pliku "Weather and current date"
-                
                     with open(file_name, "w") as file:     #Zapis do pliku txt
-                        
+                         
                         file.write("Weather for: {} || {}\n".format(location_name, weather_info['location']))
                         file.write("Temperature: {:.2f}°C\n".format(weather_info['temperature']))
                         file.write("Humidity: {}%\n".format(weather_info['humidity']))
