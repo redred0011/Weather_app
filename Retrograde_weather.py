@@ -39,10 +39,12 @@ def main():    #Główna funkcja programu do interakcji z użytkownikiem i wyśw
                     file.write("--------------------\n")
                 else:
                     print("Brak danych pogodowych dla podanego zakresu dat i lokalizacji.")
+                    main()
     
     elif choose_options == "n":
         location = input("Podaj lokalizację (np. London): ") #Pobieranie danych od użytkownika 
-        start_date = input("Podaj datę (RRRR-MM-DD): ")
+        
+        start_date = input("Podaj datę (RRRR-MM-DD):")
         end_date = start_date
         api_key = 'H3BHSY2VSQD8XSZ3VD76RNDZM'
     
@@ -72,5 +74,7 @@ def main():    #Główna funkcja programu do interakcji z użytkownikiem i wyśw
                     break # Pętla zostanie przerwana po pierwszym przejściu przez pętlę for 
                 else:
                     print("Brak danych pogodowych dla podanego zakresu dat i lokalizacji.")
+                    main()
 
-
+    else:
+        main()
