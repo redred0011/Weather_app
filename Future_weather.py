@@ -10,7 +10,7 @@ def get_future_weather(location, api_key):
     return data
     
 def main():
-    connect = sqlite3.connect('Future_weather.db')
+    connect = sqlite3.connect('Future Weather.db')
     c = connect.cursor()
     
     choose_days = int(input("Podaj liczbę dni, z których chcesz otrzymać prognozę pogody - maks. 15:"))
