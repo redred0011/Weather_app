@@ -1,6 +1,6 @@
 import requests
 from datetime import datetime
-import Weather_app
+import sqlite3
 
 
 def get_weather_forecast(lat, lon):
@@ -64,6 +64,9 @@ def get_coordinates(location_name): #Funkcja pobiera współrzędne geograficzne
         
 def main(): 
 
+    connect = sqlite3.connect('Currently Weather.db')
+    c = connect.cursor()
+    
     choose_language = input("What language? (English - E / Polish - P): ") #Pobieranie danych od użytkownika 
          
     if choose_language.lower() == "e":
@@ -81,6 +84,18 @@ def main():
         
             weather_info = get_weather_forecast(lat, lon)
             location_name = get_location_name(lat, lon)
+            
+            c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Weather'")
+            existing_table = c.fetchone()
+
+            if existing_table is None:
+                c.execute('''CREATE TABLE Weather (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                          Miejscowość TEXT, 
+                          Data TEXT,
+                          "Opis pogody" TEXT, 
+                          "Temperatura" REAL, 
+                          "Wilgotność" REAL, 
+                          "Prędkość Wiatru" INTEGER)''')
 
             if weather_info is not None and location_name is not None:  
                 current_data = datetime.now().date()
@@ -91,26 +106,43 @@ def main():
                 print("Weather description:", weather_info['weather_desc'])
                 print("Humidity: {}%".format(weather_info['humidity']))
                 print("Wind speed: {} km/h".format(weather_info['wind_speed']))
-                if weather_info is not None and location_name is not None:   
                 
-                    file_name = "Weather_"+("{}_".format(location_name)) + str(datetime.now().date()) +  ".txt" #Nazwa pliku "Weather and current date"
-                    with open(file_name, "w") as file:     #Zapis do pliku txt
-                         
-                        file.write("Weather for: {} || {}\n".format(location_name, weather_info['location']))
-                        file.write("Temperature: {:.2f}°C\n".format(weather_info['temperature']))
-                        file.write("Humidity: {}%\n".format(weather_info['humidity']))
-                        file.write("Wind speed: {} km/h\n".format(weather_info['wind_speed']))
+                Miejscowosc = location_name
+                Data = current_data
+                Opis_pogody =  weather_info['weather_desc']
+                Temperatura = weather_info['temperature']
+                Wilgotnosc = weather_info['humidity']
+                Predkosc_wiatru = weather_info['wind_speed']
                     
-                  
-                
-                else:
-                    print("Error fetching weather data or city name. Check the entered coordinates.")
-                    main()
+                c.execute("INSERT INTO Weather (Miejscowość, Data, \"Opis pogody\", \"Temperatura\", \"Wilgotność\", \"Prędkość Wiatru\") VALUES (?, ?, ?, ?, ?, ?)", (Miejscowosc, Data, Opis_pogody, Temperatura, Wilgotnosc, Predkosc_wiatru))
+
+                connect.commit()  # Zapisanie zmian w bazie danych po zakończeniu pętli
+                    
+                connect.close()
+                main()
+            else:
+                print("Error fetching weather data or city name. Check the entered coordinates.")
+                main()
        
                     
             
     elif choose_language.lower() == "p":
             
+            connect = sqlite3.connect('Currently Weather.db')
+            c = connect.cursor()
+            
+            c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Weather'")
+            existing_table = c.fetchone()
+
+            if existing_table is None:
+                c.execute('''CREATE TABLE Weather (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                          Miejscowość TEXT, 
+                          Data TEXT,
+                          "Opis pogody" TEXT, 
+                          "Temperatura" REAL, 
+                          "Wilgotność" REAL, 
+                          "Prędkość Wiatru" INTEGER)''')
+
             choose_ways = input("Szukanie nazwą - N / Współrzędnymi - C: ")         #Pobieranie danych od użytkownika 
         
             if choose_ways.lower() == "n":
@@ -131,6 +163,7 @@ def main():
             location_name = get_location_name(lat, lon)
 
             if weather_info is not None and location_name is not None:   
+                current_data = datetime.now().date()
                 print("-------------------------------------------------------------") #Wyświetlanie pobranych danych
                 print("Pogoda dla {} || {}".format(location_name, weather_info['location']))
                 print("-------------------------------------------------------------")
@@ -138,19 +171,22 @@ def main():
                 print("Opis pogody:", weather_info['weather_desc'])
                 print("Wilgotność: {}%".format(weather_info['humidity']))
                 print("Prędkość wiatru: {} km/h".format(weather_info['wind_speed']))
-                if weather_info is not None and location_name is not None:   #Z
-                
-                    file_name = "Pogoda_"+("{}_".format(location_name)) + str(datetime.now().date()) +  ".txt"
+                Miejscowosc = location_name
+                Data = current_data
+                Opis_pogody =  weather_info['weather_desc']
+                Temperatura = weather_info['temperature']
+                Wilgotnosc = weather_info['humidity']
+                Predkosc_wiatru = weather_info['wind_speed']
                     
-                    with open(file_name, "w") as file:                #Zapis do pliku txt
-                        
-                        file.write("Pogoda dla {} || {}\n".format(location_name, weather_info['location']))
-                        file.write("Temperatura: {:.2f}°C\n".format(weather_info['temperature']))
-                        file.write("Wilgotność: {}%\n".format(weather_info['humidity']))
-                        file.write("Prędkość wiatru: {} km/h\n".format(weather_info['wind_speed']))
+                c.execute("INSERT INTO Weather (Miejscowość, Data, \"Opis pogody\", \"Temperatura\", \"Wilgotność\", \"Prędkość Wiatru\") VALUES (?, ?, ?, ?, ?, ?)", (Miejscowosc, Data, Opis_pogody, Temperatura, Wilgotnosc, Predkosc_wiatru))
+
+                connect.commit()  # Zapisanie zmian w bazie danych po zakończeniu pętli
+                    
+                connect.close()
+                main()
             else:
                 print("Błąd w pobieraniu danych o pogodzie lub nazwy miejscowości. Sprawdź wprowadzone dane.")
                 main()
     else:
         main()
-                
+

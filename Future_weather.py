@@ -60,4 +60,3 @@ def main():
     else:
         print("Wprowadzono nieodpowiednią liczbę dni. Spróbuj ponownie.")
 
-main()
