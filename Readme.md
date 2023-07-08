@@ -101,6 +101,7 @@ in the future
 
 ## Things used
 
+- [SQLite3] - Stores weather data
 - [Visual Studio Code] - Helps me with the code I entered
 - [Git Bash] - Helps me connect online and standard repository
 - [Github] - My main repositories
