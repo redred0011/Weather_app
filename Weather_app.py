@@ -5,27 +5,28 @@ import Future_weather
 import Currently_weather
 
 
-def main_1(): #Funkcja pobiera dane z pliku projektu o nazwie "Retrograde_weather" a następnie uruchamia
+def main_1(): #The function retrieves data from a project file named "Retrograde_weather" and then runs it
     
     Retrograde_weather.main() 
     print(Retrograde_weather.main())
 
 
-def main_2(): #Funkcja pobiera dane z pliku projektu o nazwie "Future_weather" a następnie uruchamia
+def main_2(): #The function retrieves data from a project file named "Future_weather" and then runs it
     
     Future_weather.main()
     print(Future_weather.main())
     
 
-def main_3():  #Funkcja pobiera dane z pliku projektu o nazwie "Currently_weather" a następnie uruchamia
+def main_3():  #The function retrieves data from a project file named "Currently_weather" and then runs it
     
     Currently_weather.main() 
     print(Currently_weather.main())
    
 
-def run_weather_app(): #Główna funkcja programu Weather_app 
+def run_weather_app(): #The main function of Weather_app
     
-    choose_option = input("Currently weather? - C / Retrograde weather? - R / Future weather ? - F:").lower()  #Pobieranie danych od użytkownika 
+    
+    choose_option = input("Currently weather? - C / Retrograde weather? - R / Future weather ? - F:").lower()  #Retrieving data from the user
     
     if choose_option == "f": 
         
@@ -41,6 +42,6 @@ def run_weather_app(): #Główna funkcja programu Weather_app
     
     
         
-run_weather_app() #Uruchomienie aplikacji ponownie 
+run_weather_app() # Restarting the application
 
 

@@ -56,11 +56,11 @@ def main():    #Główna funkcja programu do interakcji z użytkownikiem i wyśw
 
                     c.execute("INSERT INTO Weather (Miejscowość, Data, \"Opis pogody\", \"Max Temperatura\", \"Min Temperatura\", \"Prędkość Wiatru\") VALUES (?, ?, ?, ?, ?, ?)", (Miejscowosc, Data, Opis_pogody, Max_temperatura, Min_temperatura, Predkosc_wiatru))
 
-                    connect.commit()  # Zapisanie zmian w bazie danych po zakończeniu pętli 
-                    main()
-                else:
-                    print("Brak danych pogodowych dla podanego zakresu dat i lokalizacji.")
-                    main()
+                connect.commit()  # Zapisanie zmian w bazie danych po zakończeniu pętli 
+                main()
+            else:
+                print("Brak danych pogodowych dla podanego zakresu dat i lokalizacji.")
+                main()
          
     
         elif choose_options == "n":
@@ -142,7 +142,7 @@ def main():    #Główna funkcja programu do interakcji z użytkownikiem i wyśw
             weather_data = get_historical_weather(start_date, end_date, location, api_key)
     
             if 'days' in weather_data:
-                for day_data in weather_data['days']:       # Displaying data retrieved from the API key
+                for day_data in weather_data['days']:
                     print("Date:", day_data['datetime'])
                     print("Weather description:", day_data['description'])
                     print("Min Temperature:", day_data['tempmax'])
@@ -156,14 +156,15 @@ def main():    #Główna funkcja programu do interakcji z użytkownikiem i wyśw
                     Max_temperature = day_data['tempmax']
                     Min_temperature = day_data['tempmin']
                     Wind_speed = day_data['windspeed']
-
-                    c.execute("INSERT INTO Weather (Place, Date, \"Weather description\", \"Max Temperature\", \"Min Temperature\", \"Wind speed\") VALUES (?, ?, ?, ?, ?, ?)", (Place, Date, Weather_description, Max_temperature, Min_temperature, Wind_speed))
-
-                    connect.commit()  # Save changes to the database after the loop ends
-                    main()
-                else:
-                    print("There are no weather data for the given date range and location.")
-                    main()
+                    connect.commit() # Save changes to the database after the loop ends
+                c.execute("INSERT INTO Weather (Place, Date, \"Weather description\", \"Max Temperature\", \"Min Temperature\", \"Wind speed\") VALUES (?, ?, ?, ?, ?, ?)", (Place, Date, Weather_description, Max_temperature, Min_temperature, Wind_speed))
+                 
+                connect.close()
+                
+                main()
+            else:
+                print("There are no weather data for the given date range and location.")
+                main()
          
     
         elif choose_options == "n": 
