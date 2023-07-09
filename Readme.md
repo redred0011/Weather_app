@@ -1,4 +1,21 @@
 # _Weather Application_ 
+
+### About program:
+
+    > The weather application allows you to present the weather forecast for the next 15 
+    days, the current weather and historical data from the last 5 days for the selected
+    location. The program uses API keys available for free on the OpenWeatherMap and Weather 
+    Visual Crossing portals to download weather information.
+
+    > The application provides detailed weather information for each location, such as
+    temperature, humidity, weather description, etc. The weather data is stored in an 
+    SQLite3 database, which was created specifically for this purpose.
+
+    > I invite you to test
+    my personal weather app.
+                _redred0011_   
+
+
 ### Main functions program:
 - Currently Weather 
 - Retrograde weather
@@ -19,12 +36,12 @@
 wants to get a weather forecast.
 - The user receives final result 
 #### Sample result 
-    Pogoda dla Warsaw || (52.2319581, 21.0067249)
+    Weather for: Warsaw || (52.2319581, 21.0067249)
     -------------------------------------------------------------
-    Temperatura: 23.41 °C
-    Opis pogody: clear sky
-    Wilgotność: 61%
-    Prędkość wiatru: 4.12 km/h
+    Temperature: 23.41 °C
+    Weather description: clear sky
+    Humidity: 61%
+    Wind speed: 4.12 km/h
     
 ### Retrograde Weather
 
@@ -42,29 +59,29 @@ for the past time
 - The user receives final result 
 
 #### Sample result 
-    Data: 2020-10-10
-    Opis pogody: Partly cloudy throughout the day with late afternoon rain.
-    Temperatura maksymalna: 18.8
-    Temperatura minimalna: 10.9
-    Prędkość wiatru: 21.9
+    Date: 2020-10-10
+    Weather description: Partly cloudy throughout the day with late afternoon rain.
+    Max Temperature: 18.8
+    Min Temperature: 10.9
+    Wind speed: 21.9
     --------------------
-    Data: 2020-10-11
-    Opis pogody: Partly cloudy throughout the day with early morning rain.
-    Temperatura maksymalna: 12.4
-    Temperatura minimalna: 7.1
-    Prędkość wiatru: 17.1
+    Date: 2020-10-11
+    Weather description: Partly cloudy throughout the day with early morning rain.
+    Max Temperature: 12.4
+    Min Temperature: 7.1
+    Wind speed: 17.1
     --------------------
-    Data: 2020-10-12
-    Opis pogody: Cloudy skies throughout the day with rain.
-    Temperatura maksymalna: 9.3
-    Temperatura minimalna: 6.4
-    Prędkość wiatru: 21.5
+    Date: 2020-10-12
+    Weather description: Cloudy skies throughout the day with rain.
+    Max Temperature: 9.3
+    Min Temperature: 6.4
+    Wind speed: 21.5
     --------------------
-    Data: 2020-10-13
-    Opis pogody: Cloudy skies throughout the day with a chance of rain throughout the day.
-    Temperatura maksymalna: 9.8
-    Temperatura minimalna: 6.0
-    Prędkość wiatru: 33.6
+    Date: 2020-10-13
+    Weather description: Cloudy skies throughout the day with a chance of rain throughout the day.
+    Max Temperature: 9.8
+    Min Temperature: 6.0
+    Wind speed: 33.6
     --------------------
 -
 
@@ -81,23 +98,23 @@ in the future
 -  The user receives final result 
 
 #### Sample result 
-    Data: 2023-06-30
-    Opis pogody: Partly cloudy throughout the day with late afternoon rain.
-    Temperatura maksymalna: 26.9
-    Temperatura minimalna: 14.0
-    Prędkość wiatru: 18.3
+    Date: 2023-06-30
+    Weather description: Partly cloudy throughout the day with late afternoon rain.
+    Max Temperature: 26.9
+    Min Temperature: 14.0
+    Wind speed: 18.3
     --------------------
-    Data: 2023-07-01
-    Opis pogody: Partly cloudy throughout the day with early morning rain.
-    Temperatura maksymalna: 23.8
-    Temperatura minimalna: 17.5
-    Prędkość wiatru: 9.0
+    Date: 2023-07-01
+    Weather description: Partly cloudy throughout the day with early morning rain.
+    Max Temperature: 23.8
+    Min Temperature: 17.5
+    Wind speed: 9.0
     --------------------
-    Data: 2023-07-02
-    Opis pogody: Partly cloudy throughout the day.
-    Temperatura maksymalna: 22.4
-    Temperatura minimalna: 17.2
-    Prędkość wiatru: 19.8
+    Date: 2023-07-02
+    Weather description: Partly cloudy throughout the day.
+    Max Temperature: 22.4
+    Min Temperature: 17.2
+    Wind speed: 19.8
 
 ## Things used
 
