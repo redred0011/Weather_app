@@ -34,12 +34,14 @@ def test_get_future_weather():
     }
 
     with mock.patch('requests.get') as mock_get:
-        mock_get.return_value.json.return_value = mock_response
+       
+        mock_get.return_value.json.return_value = mock_response  # Setting the values ​​that will be returned by calling json() on mock_get.return_value
 
-        data = get_future_weather(location, api_key)
+        data = get_future_weather(location, api_key) # Calling the function under test
 
+        # Check if requests.get() was called with the correct URL
         mock_get.assert_called_once_with(f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{location}?unitGroup=metric&key={api_key}")
-        assert data == mock_response
+        
+        
+        assert data == mock_response # Check if the returned data is as expected
 
-if __name__ == '__main__':
-    pytest.main()
