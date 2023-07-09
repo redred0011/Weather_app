@@ -2,16 +2,16 @@
 
 ### About program:
 
-    > The weather application allows you to present the weather forecast for the next 15 
+    The weather application allows you to present the weather forecast for the next 15 
     days, the current weather and historical data from the last 5 days for the selected
     location. The program uses API keys available for free on the OpenWeatherMap and Weather 
     Visual Crossing portals to download weather information.
 
-    > The application provides detailed weather information for each location, such as
+    The application provides detailed weather information for each location, such as
     temperature, humidity, weather description, etc. The weather data is stored in an 
     SQLite3 database, which was created specifically for this purpose.
 
-    > I invite you to test
+    I invite you to test
     my personal weather app.
                 _redred0011_   
 
