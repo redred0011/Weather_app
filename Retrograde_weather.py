@@ -145,7 +145,7 @@ def main():    #Główna funkcja programu do interakcji z użytkownikiem i wyśw
                 for day_data in weather_data['days']:
                     print("Date:", day_data['datetime'])
                     print("Weather description:", day_data['description'])
-                    print("Min Temperature:", day_data['tempmax'])
+                    print("Max Temperature:", day_data['tempmax'])
                     print("Min Temperature:", day_data['tempmin'])
                     print("Wind speed:", day_data['windspeed'])
                     print("--------------------")
